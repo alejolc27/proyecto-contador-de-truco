@@ -1,1 +1,0 @@
-# proyecto-contador-de-truco

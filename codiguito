@@ -1,0 +1,50 @@
+import machine
+import random
+import time
+import tm1637
+from machine import Pin
+
+def actualizar_contador(contador1, contador2):
+    if  contador1 > 15:
+        ledsito1.value(1)
+        contador1 -= 15
+
+    if  contador2 > 15:
+        ledsito2.value(1)
+        contador2 -= 15
+
+    if contador1 > 30:
+        ledsito1.value(0)
+
+    if contador2 > 30:
+        ledsito2.value(0)
+    return display.numbers(contador1, contador2)
+
+
+display = tm1637.TM1637(clk=Pin(16), dio=Pin(17))
+
+botoncito1 = Pin(12, Pin.IN, Pin.PULL_UP)
+
+botoncito2 = Pin(27, Pin.IN, Pin.PULL_UP)
+
+ledsito1 = Pin(2, Pin.OUT)
+
+ledsito2 = Pin(4, Pin.OUT)
+
+contador1 = 0
+contador2 = 0
+
+
+print("Hola")
+
+while True:
+    if botoncito1.value():
+        contador1 += 1
+        time.sleep(0.5)
+    if botoncito2.value():
+        contador2 += 1
+        time.sleep(0.5)
+    actualizar_contador(contador1, contador2)
+
+
+
